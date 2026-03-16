@@ -1,0 +1,69 @@
+<div class="gam-container">
+  <header class="header">
+    <div class="logo">
+      <span class="logo-icon">🏆</span>
+      <h1>5S Digital Rewards <small>Engajamento e Conquistas</small></h1>
+    </div>
+    <a routerLink="/dashboard" class="btn-back">← Voltar ao Dashboard</a>
+  </header>
+
+  <main class="content" *ngIf="!loading; else loadTemplate">
+    <div class="profile-card card destaque">
+      <div class="user-main">
+        <div class="avatar shadow">JJ</div>
+        <div class="user-info">
+          <h3>{{ profile.name }}</h3>
+          <p>Nível {{ profile.level }} — Expert em Governança</p>
+        </div>
+        <div class="total-points">
+            <span class="points-val">{{ profile.points }}</span>
+            <span class="points-lbl">PONTOS</span>
+        </div>
+      </div>
+      
+      <div class="exp-bar-container">
+        <div class="exp-info">
+          <span>{{ profile.currentExp }} / {{ profile.nextLevelExp }} XP para o próximo nível</span>
+        </div>
+        <div class="exp-bg">
+          <div class="exp-fill" [style.width.%]="(profile.currentExp / profile.nextLevelExp) * 100"></div>
+        </div>
+      </div>
+
+      <div class="badges-row">
+        <div class="badge" *ngFor="let badge of profile.badges">⭐ {{ badge }}</div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card ranking-card">
+        <h3>Ranking Corporativo 5S</h3>
+        <div class="leaderboard">
+          <div class="rank-item" *ngFor="let user of leaderboard; let i = index">
+            <span class="rank-pos">{{ getRankEmoji(i) }}</span>
+            <span class="rank-name">{{ user.name }}</span>
+            <span class="rank-points">{{ user.points }} pts</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card achievements-card">
+        <h3>Conquistas Recentes</h3>
+        <div class="ach-list">
+          <div class="ach-item" *ngFor="let ach of profile.recentAchievements">
+            <span class="ach-icon">🎯</span>
+            <div class="ach-details">
+              <span class="ach-title">{{ ach.title }}</span>
+              <span class="ach-date">{{ ach.date | date:'short' }}</span>
+            </div>
+          </div>
+        </div>
+        <button class="btn-secondary full">Ver Todas as Medalhas</button>
+      </div>
+    </div>
+  </main>
+
+  <ng-template #loadTemplate>
+    <div class="loading-state">Calculando suas conquistas digitais...</div>
+  </ng-template>
+</div>

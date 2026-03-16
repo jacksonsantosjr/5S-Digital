@@ -1,0 +1,12 @@
+{
+  "name": "filezen-monorepo",
+  "version": "1.0.0",
+  "description": "Monorepo para a plataforma 5S Digital SaaS (FileZen)",
+  "scripts": {
+    "start:frontend": "cd apps/frontend && npm start",
+    "start:backend-api": "cd apps/backend-api && npm run start:dev",
+    "start:backend-ai": "venv\\Scripts\\activate && cd apps/backend-ai && uvicorn src.main:app --reload --port 8000",
+    "install:all": "npm install && cd apps/frontend && npm install && cd ../backend-api && npm install && cd ../.. && venv\\Scripts\\pip install -r apps/backend-ai/requirements.txt"
+  },
+  "private": true
+}

@@ -1,0 +1,92 @@
+<div class="app-container" [class.sidebar-collapsed]="!isSidebarExpanded">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo-group">
+        <div class="logo">
+          <span class="logo-icon">📂</span>
+          <h1 *ngIf="isSidebarExpanded">5S Digital</h1>
+        </div>
+        <button class="theme-toggle-compact" (click)="toggleTheme()" [title]="isLightTheme ? 'Modo Escuro' : 'Modo Claro'">
+          <span class="toggle-icon">{{ isLightTheme ? '🌙' : '☀️' }}</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="user-profile">
+      <div class="avatar">JJ</div>
+      <div class="user-info" *ngIf="isSidebarExpanded">
+        <span class="user-name">Jackson Junior</span>
+        <span class="user-role">Administrador</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <button class="nav-item scan-btn" (click)="startScan()" title="Iniciar Varredura">
+        <span class="nav-icon">🚀</span>
+        <span class="nav-label" *ngIf="isSidebarExpanded">Iniciar Varredura</span>
+      </button>
+
+      <a class="nav-item" routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" title="Dashboard">
+        <span class="nav-icon">📊</span>
+        <span class="nav-label" *ngIf="isSidebarExpanded">Dashboard</span>
+      </a>
+      
+      <div class="nav-section" *ngIf="isSidebarExpanded">Ações de Governança</div>
+      
+      <a class="nav-item" routerLink="/classification" routerLinkActive="active" title="Classificação IA">
+        <span class="nav-icon">🧠</span>
+        <span class="nav-label" *ngIf="isSidebarExpanded">Classificação IA</span>
+      </a>
+      
+      <a class="nav-item" routerLink="/cleanup" routerLinkActive="active" title="Limpeza">
+        <span class="nav-icon">🧹</span>
+        <span class="nav-label" *ngIf="isSidebarExpanded">Limpeza Digital</span>
+      </a>
+      
+      <a class="nav-item" routerLink="/organization" routerLinkActive="active" title="Organização">
+        <span class="nav-icon">📂</span>
+        <span class="nav-label" *ngIf="isSidebarExpanded">Organização</span>
+      </a>
+      
+      <a class="nav-item" routerLink="/standardization" routerLinkActive="active" title="Padronização">
+        <span class="nav-icon">📏</span>
+        <span class="nav-label" *ngIf="isSidebarExpanded">Padronização</span>
+      </a>
+      
+      <div class="nav-section" *ngIf="isSidebarExpanded">Relatórios e Segurança</div>
+      
+      <a class="nav-item" routerLink="/analytics" routerLinkActive="active" title="Relatórios">
+        <span class="nav-icon">📈</span>
+        <span class="nav-label" *ngIf="isSidebarExpanded">Relatórios</span>
+      </a>
+      
+      <a class="nav-item" routerLink="/security" routerLinkActive="active" title="Segurança">
+        <span class="nav-icon">🛡️</span>
+        <span class="nav-label" *ngIf="isSidebarExpanded">Privacidade & LGPD</span>
+      </a>
+      
+      <a class="nav-item" routerLink="/gamification" routerLinkActive="active" title="Gamificação">
+        <span class="nav-icon">🏆</span>
+        <span class="nav-label" *ngIf="isSidebarExpanded">Conquistas</span>
+      </a>
+      
+      <a class="nav-item" routerLink="/integrations" routerLinkActive="active" title="Integrações">
+        <span class="nav-icon">☁️</span>
+        <span class="nav-label" *ngIf="isSidebarExpanded">Integrações</span>
+      </a>
+    </nav>
+
+    <!-- Footer removido para limpeza -->
+
+    <!-- Filipeta / Toggle Button -->
+    <button class="sidebar-toggle-trigger" (click)="toggleSidebar()" [class.flipped]="!isSidebarExpanded">
+      <span class="toggle-icon">◀</span>
+    </button>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

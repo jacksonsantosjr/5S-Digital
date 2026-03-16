@@ -1,0 +1,162 @@
+.security-container {
+  min-height: 100vh;
+  padding: 1rem;
+  color: var(--text-main);
+  animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.header {
+  margin-bottom: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0 0.5rem;
+}
+
+.logo h1 {
+  font-size: 2.25rem;
+  font-weight: 800;
+  margin: 0;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.04em;
+}
+
+.logo small {
+  display: block;
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-top: 0.25rem;
+  -webkit-text-fill-color: var(--text-muted);
+}
+
+.btn-back {
+  padding: 0.6rem 1.25rem;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  color: var(--text-main);
+  text-decoration: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.risk-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-radius: 28px;
+  padding: 3rem;
+  border: 1px solid var(--glass-border);
+  margin-bottom: 3rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.risk-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: var(--gradient-primary);
+}
+
+.risk-info h3 {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.9rem;
+}
+
+.score-value {
+  font-size: 5rem;
+  font-weight: 900;
+  display: block;
+  margin: 1.5rem 0;
+  font-family: 'Outfit', sans-serif;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.risk-meter {
+  height: 14px;
+  background: var(--glass);
+  border-radius: var(--radius-std);
+  overflow: hidden;
+  margin: 2rem auto;
+  max-width: 500px;
+  border: 1px solid var(--glass-border);
+}
+
+.meter-fill {
+  height: 100%;
+  background: var(--gradient-primary);
+  box-shadow: 0 0 15px var(--primary-glow);
+  transition: width 1s ease-out;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2.5rem;
+}
+
+.card h3 {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+}
+
+.issue-item {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.25rem;
+  background: var(--glass);
+  border-radius: var(--radius-std);
+  border: 1px solid var(--glass-border);
+  margin-bottom: 0.75rem;
+  transition: all 0.2s;
+}
+
+.issue-item:hover {
+  background: var(--glass-hover);
+  border-color: var(--warning);
+}
+
+.issue-file { display: block; font-weight: 800; font-size: 1rem; }
+.issue-desc { font-size: 0.9rem; color: var(--text-muted); }
+
+.actions-list {
+  list-style: none;
+  padding: 0;
+}
+
+.actions-list li {
+  padding: 1rem 1.25rem;
+  background: var(--glass);
+  border-radius: var(--radius-std);
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+  border-left: 4px solid var(--primary-light);
+}
+
+.loading-state {
+  text-align: center;
+  padding: 10rem;
+  color: var(--text-muted);
+  font-size: 1.2rem;
+  font-weight: 600;
+}

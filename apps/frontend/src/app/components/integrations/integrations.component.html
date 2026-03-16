@@ -1,0 +1,66 @@
+<div class="int-container">
+  <header class="header">
+    <div class="logo">
+      <span class="logo-icon">☁️</span>
+      <h1>5S Digital Connect <small>Integrações Corporativas e Nuvem</small></h1>
+    </div>
+    <a routerLink="/dashboard" class="btn-back">← Voltar ao Dashboard</a>
+  </header>
+
+  <main class="content" *ngIf="!loading; else loadTemplate">
+    <div class="intro-card card">
+      <h3>Conecte seus Ecossistemas Digitais</h3>
+      <p>O 5S Digital organiza seus arquivos diretamente na fonte. Escolha um provedor para iniciar a sincronização 5S.</p>
+    </div>
+
+    <div class="local-environment card highlight" *ngIf="connectors.length > 0">
+      <div class="conn-header">
+        <span class="conn-icon">💻</span>
+        <div class="conn-title">
+          <h4>Ambiente Local (Este Computador)</h4>
+          <span class="status-badge on">Prioridade Principal</span>
+        </div>
+      </div>
+      <p>Gerencie seus arquivos locais e pastas do sistema para manter a conformidade 5S diretamente no seu dispositivo.</p>
+      <div class="conn-actions-row">
+        <button class="btn-primary" (click)="sync('local_files')">⚡ Iniciar Varredura Local</button>
+        <button class="btn-secondary">Configurar Pastas Críticas</button>
+      </div>
+    </div>
+
+    <div class="section-divider">
+      <span>OU CONECTE NUVEM</span>
+    </div>
+
+    <div class="connectors-grid">
+      <ng-container *ngFor="let conn of connectors">
+        <div class="connector-card card" *ngIf="conn.id !== 'local_files'" [class.connected]="conn.status === 'connected'">
+          <div class="conn-header">
+            <span class="conn-icon">{{ conn.icon }}</span>
+            <div class="conn-title">
+              <h4>{{ conn.name }}</h4>
+              <span class="status-badge" [class.on]="conn.status === 'connected'">
+                {{ conn.status === 'connected' ? 'Conectado' : 'Disponível' }}
+              </span>
+            </div>
+          </div>
+
+          <div class="conn-body">
+            <p *ngIf="conn.lastSync">Última sincronização: {{ conn.lastSync | date:'short' }}</p>
+            <p *ngIf="!conn.lastSync">Aguardando primeira conexão...</p>
+          </div>
+
+          <div class="conn-actions">
+            <button class="btn-primary full" *ngIf="conn.status !== 'connected'" (click)="connect(conn.id)">Conectar</button>
+            <button class="btn-secondary full" *ngIf="conn.status === 'connected'" (click)="sync(conn.id)">🔄 Sincronizar Agora</button>
+            <button class="btn-link" *ngIf="conn.status === 'connected'">Configurar Regras</button>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </main>
+
+  <ng-template #loadTemplate>
+    <div class="loading-state">Carregando conectores de nuvem...</div>
+  </ng-template>
+</div>

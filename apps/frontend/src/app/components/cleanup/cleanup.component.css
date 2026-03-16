@@ -1,0 +1,224 @@
+.cleanup-container {
+  min-height: 100vh;
+  padding: 1rem;
+  color: var(--text-main);
+  animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.header {
+  margin-bottom: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0 0.5rem;
+}
+
+.logo h1 {
+  font-size: 2.25rem;
+  font-weight: 800;
+  margin: 0;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.04em;
+}
+
+.logo small {
+  display: block;
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-top: 0.25rem;
+  -webkit-text-fill-color: var(--text-muted);
+}
+
+.btn-back {
+  padding: 0.6rem 1.25rem;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  color: var(--text-main);
+  text-decoration: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.btn-back:hover {
+  background: var(--glass-hover);
+  transform: translateX(-4px);
+}
+
+.summary-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.stat-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-radius: 24px;
+  padding: 2.5rem;
+  border: 1px solid var(--glass-border);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.stat-card.destaque {
+  background: var(--glass);
+  border-color: var(--primary-glow);
+  box-shadow: 0 15px 40px -10px var(--primary-glow);
+}
+
+.stat-card h3 {
+  font-size: 0.8rem;
+  margin: 0;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 800;
+}
+
+.stat-value {
+  display: block;
+  font-size: 3rem;
+  font-weight: 900;
+  margin-top: 1.5rem;
+  font-family: 'Outfit', sans-serif;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.destaque .stat-value {
+  font-size: 3.5rem;
+  filter: drop-shadow(0 0 10px var(--primary-glow));
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.5rem;
+  padding: 0 0.5rem;
+}
+
+.card-header h3 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  font-family: 'Outfit', sans-serif;
+}
+
+.btn-primary {
+  background: var(--gradient-primary);
+  border: none;
+  color: white;
+  padding: 0.8rem 1.75rem;
+  border-radius: var(--radius-std);
+  font-weight: 800;
+  font-size: 0.95rem;
+  cursor: pointer;
+  box-shadow: 0 10px 20px -5px var(--primary-glow);
+  transition: all 0.3s;
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px -5px var(--primary-glow);
+}
+
+.duplicate-item {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background: var(--glass);
+  backdrop-filter: blur(10px);
+  border-radius: 18px;
+  border: 1px solid var(--glass-border);
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.duplicate-item:hover {
+  background: var(--glass-hover);
+  transform: scale(1.01);
+  border-color: var(--primary-light);
+}
+
+.item-icon {
+  font-size: 1.5rem;
+  background: var(--bg-card);
+  width: 54px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-std);
+  border: 1px solid var(--glass-border);
+}
+
+.item-info {
+  flex-grow: 1;
+}
+
+.item-name {
+  display: block;
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-bottom: 0.25rem;
+}
+
+.item-reason {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.item-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.btn-icon {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  color: var(--text-main);
+  padding: 0.5rem;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.btn-icon:hover {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.btn-icon.danger:hover {
+  background: var(--danger);
+  border-color: var(--danger);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 6rem 2rem;
+  color: var(--success);
+  font-size: 1.5rem;
+  font-weight: 800;
+  font-family: 'Outfit', sans-serif;
+  background: rgba(16, 185, 129, 0.05);
+  border-radius: 24px;
+  border: 1px dashed var(--success);
+}

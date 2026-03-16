@@ -1,0 +1,59 @@
+<div class="classification-container">
+  <header class="header">
+    <div class="logo">
+      <span class="logo-icon">🧠</span>
+      <h1>5S Digital AI <small>Classificação Inteligente</small></h1>
+    </div>
+    <a routerLink="/dashboard" class="btn-back">← Voltar ao Dashboard</a>
+  </header>
+
+  <main class="content">
+    <div class="card upload-card">
+      <h3>Testar Motor de IA</h3>
+      <p>Faça upload de um documento (PDF ou Imagem) para que a IA identifique a categoria e extraia dados automaticamente.</p>
+      
+      <div class="upload-zone">
+        <input type="file" id="file" (change)="onFileSelected($event)" accept=".pdf,image/*">
+        <label for="file" class="upload-label">
+          <span class="icon">📁</span>
+          <span>{{ selectedFile ? selectedFile.name : 'Selecione ou arraste um arquivo' }}</span>
+        </label>
+      </div>
+
+      <button class="btn-primary" [disabled]="!selectedFile || processing" (click)="processDocument()">
+        {{ processing ? 'Processando com IA...' : 'Classificar Documento' }}
+      </button>
+    </div>
+
+    <div class="result-area" *ngIf="result">
+      <div class="card result-card">
+        <h3>Resultado da Análise</h3>
+        
+        <div class="classification-badge">
+          <span class="label">Categoria Detectada:</span>
+          <span class="badge" [style.background-color]="result.classification.confidence > 0.9 ? '#10b981' : '#f59e0b'">
+            {{ result.classification.category }}
+          </span>
+          <span class="confidence">({{ (result.classification.confidence * 100).toFixed(0) }}% de confiança)</span>
+        </div>
+
+        <div class="extracted-text">
+          <h4>Texto Extraído (OCR):</h4>
+          <div class="text-box">
+            {{ result.extracted_text }}
+          </div>
+        </div>
+
+        <div class="entities">
+          <h4>Dados Extraídos:</h4>
+          <div class="entity-grid">
+            <div class="entity-item" *ngFor="let entity of result.classification.entities | keyvalue">
+              <span class="entity-key">{{ $any(entity.key).toUpperCase() }}:</span>
+              <span class="entity-value">{{ entity.value }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

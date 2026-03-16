@@ -1,0 +1,212 @@
+.organization-container {
+  min-height: 100vh;
+  padding: 1rem;
+  color: var(--text-main);
+  animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.header {
+  margin-bottom: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0 0.5rem;
+}
+
+.logo h1 {
+  font-size: 2.25rem;
+  font-weight: 800;
+  margin: 0;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.04em;
+}
+
+.logo small {
+  display: block;
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-top: 0.25rem;
+  -webkit-text-fill-color: var(--text-muted);
+}
+
+.btn-back {
+  padding: 0.6rem 1.25rem;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  color: var(--text-main);
+  text-decoration: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.search-section {
+  background: var(--bg-card);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-radius: 24px;
+  padding: 2.5rem;
+  border: 1px solid var(--glass-border);
+  margin-bottom: 3rem;
+  box-shadow: var(--shadow-lg);
+}
+
+.search-section h3 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  font-family: 'Outfit', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.search-bar {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.search-bar input {
+  flex-grow: 1;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  color: var(--text-main);
+  padding: 1.1rem 1.75rem;
+  border-radius: var(--radius-std);
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.search-bar input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px var(--primary-glow);
+  background: var(--glass-hover);
+}
+
+.search-results {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.result-item {
+  background: var(--glass);
+  padding: 1.25rem 1.75rem;
+  border-radius: var(--radius-std);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+}
+
+.result-item:hover {
+  border-color: var(--glass-border);
+  background: var(--glass-hover);
+}
+
+.res-name {
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.res-relevance {
+  color: var(--primary-light);
+  font-size: 0.9rem;
+  font-weight: 800;
+  font-family: 'Outfit', sans-serif;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.5rem;
+  padding: 0 0.5rem;
+}
+
+.card-header h3 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  font-family: 'Outfit', sans-serif;
+}
+
+.move-item {
+  display: grid;
+  grid-template-columns: 1fr 60px 1fr;
+  align-items: center;
+  background: var(--bg-card);
+  backdrop-filter: blur(10px);
+  padding: 2rem;
+  border-radius: var(--radius-std);
+  border: 1px solid var(--glass-border);
+  margin-bottom: 1.25rem;
+  transition: all 0.3s;
+}
+
+.move-item:hover {
+  transform: translateY(-4px);
+  border-color: var(--primary-light);
+  box-shadow: var(--shadow-md);
+}
+
+.file-info, .suggested-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.file-name {
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--text-main);
+}
+
+.current-path {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.suggested-path {
+  font-size: 1rem;
+  color: var(--success);
+  font-weight: 800;
+  font-family: 'Outfit', sans-serif;
+}
+
+.move-arrow {
+  text-align: center;
+  font-size: 1.5rem;
+  color: var(--text-muted);
+  opacity: 0.5;
+}
+
+.confidence-badge {
+  display: inline-flex;
+  padding: 0.4rem 1rem;
+  border-radius: var(--radius-std);
+  font-size: 0.75rem;
+  font-weight: 900;
+  color: white;
+  margin-top: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.loading-state {
+  text-align: center;
+  padding: 8rem;
+  color: var(--text-muted);
+  font-size: 1.2rem;
+  font-weight: 600;
+}

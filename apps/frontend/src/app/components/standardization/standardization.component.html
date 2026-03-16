@@ -1,0 +1,49 @@
+<div class="std-container">
+  <header class="header">
+    <div class="logo">
+      <span class="logo-icon">📏</span>
+      <h1>5S Digital Standard <small>Seiketsu (Senso de Padronização)</small></h1>
+    </div>
+    <a routerLink="/dashboard" class="btn-back">← Voltar ao Dashboard</a>
+  </header>
+
+  <main class="content">
+    <div class="card rules-card">
+      <h3>Regras de Nomenclatura Ativas</h3>
+      <p>Padrão Corporativo: <code>AAAA-MM-Tipo-Assunto-vXXX.ext</code></p>
+      <div class="example">Ex: <code>2026-03-Contrato-Aluguel-v001.pdf</code></div>
+    </div>
+
+    <div class="card list-card">
+      <div class="card-header">
+        <h3>Arquivos Fora do Padrão Detectados</h3>
+        <button class="btn-primary" (click)='applyBatch()' [disabled]="filesToReview.length === 0 || renaming">
+          {{ renaming ? 'Processando...' : '✏️ Padronizar Tudo' }}
+        </button>
+      </div>
+
+      <div class="files-list" *ngIf="!loading; else loadTemplate">
+        <div class="file-row" *ngFor="let file of filesToReview" [ngClass]="{'valid': file.is_valid}">
+          <div class="status-icon">{{ file.is_valid ? '✅' : '⚠️' }}</div>
+          <div class="name-info">
+            <span class="old-name">{{ file.name }}</span>
+            <span class="arrow" *ngIf="!file.is_valid">➔</span>
+            <span class="new-name" *ngIf="!file.is_valid">{{ file.suggested_name }}</span>
+          </div>
+          <div class="actions">
+            <button class="btn-icon">✏️</button>
+            <button class="btn-icon danger">✖</button>
+          </div>
+        </div>
+        
+        <div class="empty-state" *ngIf="filesToReview.length === 0">
+          ✨ Todos os nomes estão seguindo os padrões definidos!
+        </div>
+      </div>
+
+      <ng-template #loadTemplate>
+        <div class="loading-state">Validando padrões de nomenclatura...</div>
+      </ng-template>
+    </div>
+  </main>
+</div>

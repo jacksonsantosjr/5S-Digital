@@ -1,0 +1,53 @@
+<div class="cleanup-container">
+  <header class="header">
+    <div class="logo">
+      <span class="logo-icon">✨</span>
+      <h1>5S Digital Clean <small>Seiso (Senso de Limpeza)</small></h1>
+    </div>
+    <a routerLink="/dashboard" class="btn-back">← Voltar ao Dashboard</a>
+  </header>
+
+  <main class="content">
+    <div class="summary-row" *ngIf="summary">
+      <div class="card stat-card">
+        <h3>Duplicatas Totais</h3>
+        <span class="stat-value">{{ summary.totalDuplicates.toLocaleString('pt-BR') }}</span>
+      </div>
+      <div class="card stat-card destaque">
+        <h3>Economia Potencial</h3>
+        <span class="stat-value">{{ summary.potentialSavingsGB }} GB</span>
+      </div>
+      <div class="card stat-card">
+        <h3>Arquivos Obsoletos</h3>
+        <span class="stat-value">{{ summary.obsoleteFiles.toLocaleString('pt-BR') }}</span>
+      </div>
+    </div>
+
+    <div class="card duplicates-card">
+      <div class="card-header">
+        <h3>Sugestões de Limpeza Automática</h3>
+        <button class="btn-primary" (click)="performCleanup()" [disabled]="duplicates.length === 0 || cleaning">
+          {{ cleaning ? 'Limpando...' : '🧹 Limpar Tudo Agora' }}
+        </button>
+      </div>
+
+      <div class="duplicate-list">
+        <div class="duplicate-item" *ngFor="let item of duplicates">
+          <div class="item-icon">📄</div>
+          <div class="item-info">
+            <span class="item-name">{{ item.duplicate }}</span>
+            <span class="item-reason">{{ item.reason }} — {{ item.savingsMB }} MB economizados</span>
+          </div>
+          <div class="item-actions">
+            <button class="btn-icon">👁️</button>
+            <button class="btn-icon danger">🗑️</button>
+          </div>
+        </div>
+        
+        <div class="empty-state" *ngIf="duplicates.length === 0 && !loading">
+          🎉 Parabéns! Sua higiene digital está excelente. Nenhuma duplicata encontrada.
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

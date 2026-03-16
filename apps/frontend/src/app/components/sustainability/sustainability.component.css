@@ -1,0 +1,125 @@
+.sustainability-container {
+  min-height: 100vh;
+  padding: 2rem;
+  background: var(--bg-app);
+  color: var(--text-main);
+  font-family: 'Inter', sans-serif;
+}
+
+.alert-banner {
+  background: rgba(245, 158, 11, 0.2);
+  border: 1px solid var(--warning);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(245, 158, 11, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.gauge-container {
+  text-align: center;
+  padding: 2rem;
+}
+
+.gauge-value {
+  font-size: 4rem;
+  font-weight: 800;
+  color: var(--success);
+}
+
+.auto-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.auto-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: var(--glass);
+  border-radius: 0.75rem;
+}
+
+.toggle {
+  background: var(--bg-dark);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 0.4rem 1rem;
+  border-radius: var(--radius-std);
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.toggle.on {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+  box-shadow: 0 0 10px var(--primary);
+}
+
+.next-run {
+  margin-top: 2rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.anomalies-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.anomaly-item {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1rem;
+  background: var(--glass);
+  border-radius: 0.75rem;
+}
+
+.anomaly-icon {
+  width: 35px;
+  height: 35px;
+  background: var(--warning);
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-std);
+  font-weight: bold;
+}
+
+.anomaly-icon.medium { background: var(--warning); }
+.anomaly-icon.low { background: var(--primary); color: white; }
+
+.anomaly-info { flex-grow: 1; }
+.anomaly-file { display: block; font-weight: 600; font-size: 0.9rem; }
+.anomaly-issue { font-size: 0.8rem; color: var(--text-muted); }
+
+.loading-state {
+  text-align: center;
+  padding: 5rem;
+  color: var(--text-muted);
+}

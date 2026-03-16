@@ -1,0 +1,57 @@
+<div class="organization-container">
+  <header class="header">
+    <div class="logo">
+      <span class="logo-icon">📂</span>
+      <h1>5S Digital <small>Seiton (Senso de Organização)</small></h1>
+    </div>
+    <a routerLink="/dashboard" class="btn-back">← Voltar ao Dashboard</a>
+  </header>
+
+  <main class="content">
+    <div class="search-section card">
+      <h3>🔍 Busca Semântica por IA</h3>
+      <div class="search-bar">
+        <input type="text" [(ngModel)]="searchQuery" (keyup.enter)="onSearch()" placeholder="Ex: 'contratos de TI vencidos' ou 'relatórios financeiros 2023'">
+        <button class="btn-primary" (click)="onSearch()">Buscar</button>
+      </div>
+      <div class="search-results" *ngIf="searchResults.length > 0">
+        <div class="result-item" *ngFor="let res of searchResults">
+          <span class="res-name">{{ res.name }}</span>
+          <span class="res-relevance">Relevância: {{ (res.relevance * 100).toFixed(0) }}%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="reorg-section card">
+      <div class="card-header">
+        <h3>🚀 Sugestões de Reorganização Inteligente</h3>
+        <button class="btn-primary" (click)="applyReorg()" [disabled]="suggestedMoves.length === 0 || applying">
+          {{ applying ? 'Reorganizando...' : 'Aplicar Reorganização em Massa' }}
+        </button>
+      </div>
+
+      <div class="moves-list" *ngIf="!loading; else loadTemplate">
+        <div class="move-item" *ngFor="let move of suggestedMoves">
+          <div class="file-info">
+            <span class="file-name">{{ move.name }}</span>
+            <span class="current-path">Local atual: {{ move.current_path }}</span>
+          </div>
+          <div class="move-arrow">➡️</div>
+          <div class="suggested-info">
+            <span class="suggested-path">{{ move.suggested_path }}</span>
+            <span class="confidence-badge" [style.background-color]="move.confidence > 0.9 ? '#10b981' : '#f59e0b'">
+                {{ (move.confidence * 100).toFixed(0) }}% Confiança
+            </span>
+          </div>
+        </div>
+        <div class="empty-state" *ngIf="suggestedMoves.length === 0">
+          Tudo em ordem! Não há sugestões de reorganização no momento.
+        </div>
+      </div>
+      
+      <ng-template #loadTemplate>
+        <div class="loading-state">Analisando ecossistema digital...</div>
+      </ng-template>
+    </div>
+  </main>
+</div>

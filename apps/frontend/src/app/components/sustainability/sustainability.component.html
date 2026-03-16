@@ -1,0 +1,68 @@
+<div class="sustainability-container">
+  <header class="header">
+    <div class="logo">
+      <span class="logo-icon">🧘</span>
+      <h1>5S Digital Monitor <small>Shitsuke (Senso de Disciplina)</small></h1>
+    </div>
+    <a routerLink="/dashboard" class="btn-back">← Voltar ao Dashboard</a>
+  </header>
+
+  <main class="content" *ngIf="!loading; else loadTemplate">
+    <div class="alert-banner" *ngIf="maintenanceNeeded">
+      <span class="icon">⚠️</span>
+      <p>A IA detectou uma degradação na organização digital. Recomenda-se uma nova varredura profunda.</p>
+      <button class="btn-primary mini" routerLink="/dashboard">Ver Dashboard</button>
+    </div>
+
+    <div class="grid">
+      <div class="card compliance-card" [style.border-color]="compliance.compliance_rate > 80 ? 'var(--success)' : 'var(--warning)'">
+        <h3>Taxa de Conformidade 5S</h3>
+        <div class="gauge-container">
+          <div class="gauge-value">{{ compliance.compliance_rate }}%</div>
+          <p>Seu ecossistema digital está seguindo a maioria das diretrizes corporativas.</p>
+        </div>
+      </div>
+
+      <div class="card automation-card">
+        <h3>Automações Ativas</h3>
+        <div class="auto-list">
+          <div class="auto-item">
+            <span>Limpeza Automática de Duplicatas</span>
+            <button class="toggle" [class.on]="automation.auto_cleanup_enabled" (click)="toggleAutoCleanup()">
+              {{ automation.auto_cleanup_enabled ? 'ON' : 'OFF' }}
+            </button>
+          </div>
+          <div class="auto-item">
+            <span>Padronização de Nomes em Tempo Real</span>
+            <button class="toggle on">ON</button>
+          </div>
+          <div class="auto-item">
+            <span>Classificação de Novos Documentos</span>
+            <button class="toggle on">ON</button>
+          </div>
+        </div>
+        <div class="next-run">
+            Próxima varredura agendada: {{ automation.next_scheduled_run | date:'short' }}
+        </div>
+      </div>
+    </div>
+
+    <div class="card anomalies-card">
+      <h3>Anomalias de Governança Identificadas</h3>
+      <div class="anomalies-list">
+        <div class="anomaly-item" *ngFor="let alert of compliance.alerts">
+          <div class="anomaly-icon" [ngClass]="alert.severity">!</div>
+          <div class="anomaly-info">
+            <span class="anomaly-file">{{ alert.file }}</span>
+            <span class="anomaly-issue">{{ alert.issue }}</span>
+          </div>
+          <button class="btn-icon">🔧</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <ng-template #loadTemplate>
+    <div class="loading-state">Monitorando disciplina digital...</div>
+  </ng-template>
+</div>

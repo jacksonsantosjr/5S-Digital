@@ -1,0 +1,51 @@
+<div class="security-container">
+  <header class="header">
+    <div class="logo">
+      <span class="logo-icon">🛡️</span>
+      <h1>5S Digital Privacy <small>Segurança e Conformidade LGPD</small></h1>
+    </div>
+    <a routerLink="/dashboard" class="btn-back">← Voltar ao Dashboard</a>
+  </header>
+
+  <main class="content" *ngIf="!loading; else loadTemplate">
+    <div class="card risk-card" [ngClass]="riskClass">
+      <div class="risk-info">
+        <h3>Índice de Proteção de Dados</h3>
+        <span class="score-value">{{ report.score }}%</span>
+      </div>
+      <div class="risk-meter">
+        <div class="meter-fill" [style.width.%]="report.score"></div>
+      </div>
+      <p class="status-text">Status: <strong>{{ report.status === 'compliant' ? 'Em Conformidade' : 'Atenção Necessária' }}</strong></p>
+    </div>
+
+    <div class="grid">
+      <div class="card issues-card">
+        <h3>Alertas de Privacidade Ativos</h3>
+        <div class="issues-list">
+          <div class="issue-item" *ngFor="let issue of report.issues">
+            <span class="issue-icon">⚠️</span>
+            <div class="issue-details">
+              <span class="issue-file">{{ issue.file }}</span>
+              <span class="issue-desc">{{ issue.issue }}</span>
+            </div>
+            <button class="btn-primary mini">{{ issue.action }}</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card info-card">
+        <h3>Ações Recomendadas (LGPD)</h3>
+        <ul class="actions-list">
+          <li>🔒 Ativar criptografia em repouso para pastas de RH</li>
+          <li>🎭 Mascarar CPFs detectados em planilhas financeiras</li>
+          <li>📅 Agendar limpeza de logs de acesso antigos</li>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <ng-template #loadTemplate>
+    <div class="loading-state">Auditando conformidade de privacidade...</div>
+  </ng-template>
+</div>
