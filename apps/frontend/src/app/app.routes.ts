@@ -9,6 +9,7 @@ import { SustainabilityComponent } from './components/sustainability/sustainabil
 import { SecurityComponent } from './components/security/security.component';
 import { GamificationComponent } from './components/gamification/gamification.component';
 import { IntegrationsComponent } from './components/integrations/integrations.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -21,5 +22,6 @@ export const routes: Routes = [
   { path: 'sustainability', component: SustainabilityComponent },
   { path: 'security', component: SecurityComponent },
   { path: 'gamification', component: GamificationComponent },
-  { path: 'integrations', component: IntegrationsComponent }
+  { path: 'integrations', component: IntegrationsComponent },
+  { path: 'settings', component: SettingsComponent }
 ];

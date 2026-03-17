@@ -13,6 +13,7 @@ import { filter } from 'rxjs/operators';
   styleUrl: './app.css'
 })
 export class AppComponent {
+  // Versão de sincronização: 1.0.4
   title = () => '5S Digital';
   isLightTheme = false;
   isSidebarExpanded = true;

@@ -1,0 +1,502 @@
+<div class="settings-container">
+  <div class="settings-sidebar">
+    <div class="sidebar-title">Configurações 5S</div>
+    <nav class="settings-nav">
+      <button 
+        *ngFor="let tab of tabs" 
+        class="tab-btn" 
+        [class.active]="activeTab === tab.id"
+        (click)="setActiveTab(tab.id)">
+        <span class="tab-icon">{{ tab.icon }}</span>
+        <span class="tab-label">{{ tab.label }}</span>
+      </button>
+    </nav>
+  </div>
+
+  <div class="settings-content">
+    <!-- Seção de Geral -->
+    <div *ngIf="activeTab === 'general'" class="view-section animate-fade-in">
+      <!-- Hero Section -->
+      <div class="general-hero">
+        <div class="hero-content">
+          <h1>Bem-vindo às Configurações, {{ generalConfig.adminUser }}</h1>
+          <p>Gerencie as diretrizes globais e a segurança do seu ecossistema 5S Digital.</p>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat-item">
+            <span class="stat-val">Pro</span>
+            <span class="stat-lbl">Plano Atual</span>
+          </div>
+          <div class="hero-stat-item">
+            <span class="stat-val">v1.0.4</span>
+            <span class="stat-lbl">Versão</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="seiri-grid">
+        <!-- Perfil da Organização -->
+        <div class="settings-card">
+          <div class="card-icon">🏢</div>
+          <div class="card-details">
+            <h3>Perfil da Organização</h3>
+            <p>Informações que aparecem nos relatórios e auditorias.</p>
+            <div class="input-stack">
+              <input type="text" [(ngModel)]="generalConfig.orgName" class="full-input" placeholder="Nome da Empresa">
+              <input type="email" [(ngModel)]="generalConfig.adminEmail" class="full-input" placeholder="E-mail Administrativo">
+            </div>
+          </div>
+        </div>
+
+        <!-- Segurança -->
+        <div class="settings-card">
+          <div class="card-icon">🔒</div>
+          <div class="card-details">
+            <h3>Segurança e Acesso</h3>
+            <p>Proteja as configurações governamentais do sistema.</p>
+            <div class="action-stack">
+              <button class="btn-secondary small">Alterar Senha Master</button>
+              <div class="toggle-area mt-1">
+                <label class="switch small">
+                  <input type="checkbox" [(ngModel)]="generalConfig.twoFactorAuth">
+                  <span class="slider round"></span>
+                </label>
+                <span class="text-tiny">Autenticação de 2 Fatores</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Preferências -->
+        <div class="settings-card">
+          <div class="card-icon">🎨</div>
+          <div class="card-details">
+            <h3>Preferências do Sistema</h3>
+            <p>Customização da experiência de uso.</p>
+            <div class="input-stack">
+              <select [(ngModel)]="generalConfig.theme" class="full-input select-styled">
+                <option value="Dark">Tema Escuro (Deep Space)</option>
+                <option value="Light">Tema Claro</option>
+              </select>
+              <select [(ngModel)]="generalConfig.language" class="full-input select-styled">
+                <option value="Português (BR)">Português (Brasil)</option>
+                <option value="English">English</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ambiente Local -->
+        <div class="settings-card">
+          <div class="card-icon">💻</div>
+          <div class="card-details">
+            <h3>Ambiente Local (Este Computador)</h3>
+            <p>Gerencie pastas críticas do sistema (Downloads, Documentos, Desktop) e unidades de rede locais.</p>
+            <div class="action-stack-row">
+              <button class="btn-primary small" (click)="sync('local_files')">⚡ Forçar Varredura Local</button>
+              <button class="btn-secondary small">Configurar Pastas Críticas</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Conectores de Nuvem -->
+        <h3 class="section-subtitle full-width mt-1">Conectores de Nuvem (Storage)</h3>
+        
+        <div *ngFor="let conn of connectors" class="settings-card connector-card" [class.connected]="conn.status === 'connected'">
+          <div class="card-icon">{{ conn.icon }}</div>
+          <div class="card-details flex-grow">
+            <div class="conn-header-flex">
+              <h3>{{ conn.name }}</h3>
+              <span class="status-badge" [class.on]="conn.status === 'connected'">
+                {{ conn.status === 'connected' ? 'Conectado' : 'Disponível' }}
+              </span>
+            </div>
+            
+            <p *ngIf="conn.lastSync" class="sync-info">Última sincronização: {{ conn.lastSync | date:'short' }}</p>
+            <p *ngIf="!conn.lastSync" class="sync-info">Aguardando primeira conexão...</p>
+            
+            <div class="conn-actions mt-05">
+              <button class="btn-primary small" *ngIf="conn.status !== 'connected'" (click)="connect(conn.id)">Conectar</button>
+              <button class="btn-secondary small" *ngIf="conn.status === 'connected'" (click)="sync(conn.id)">🔄 Sincronizar Agora</button>
+              <button class="btn-link small" *ngIf="conn.status === 'connected'">Configurar Regras</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Seção de Seiketsu / Categorização -->
+    <div *ngIf="activeTab === 'seiketsu'" class="view-section animate-fade-in">
+      <div class="section-header">
+        <div>
+          <h2>Gestão de Categorização (Padronização)</h2>
+          <p>Defina a estrutura hierárquica por departamento e seus padrões de nomenclatura.</p>
+        </div>
+        <button class="btn-primary">+ Novo Departamento</button>
+      </div>
+
+      <div class="departments-grid">
+        <div *ngFor="let dept of departments" class="dept-card" [class.expanded]="dept.isExpanded">
+          <div class="dept-header" (click)="toggleDepartment(dept)">
+            <div class="dept-info">
+              <span class="dept-icon">{{ dept.icon }}</span>
+              <span class="dept-name">{{ dept.name }}</span>
+            </div>
+            <span class="chevron">{{ dept.isExpanded ? '▼' : '▶' }}</span>
+          </div>
+
+          <div *ngIf="dept.isExpanded" class="dept-body">
+            <div *ngFor="let cat of dept.categories" class="category-block">
+              <div class="category-header">
+                <div class="category-label-group">
+                  <span class="category-title">{{ cat.name }}</span>
+                  <div class="category-keywords">
+                    <span *ngFor="let kw of cat.keywords" class="anchor-tag">{{ kw }}</span>
+                  </div>
+                </div>
+                <button class="btn-icon">✎</button>
+              </div>
+              <div class="doc-types-list">
+                <div *ngFor="let doc of cat.documents" class="doc-tag-complex">
+                  <div class="doc-tag-main">
+                    <span class="doc-name">{{ doc.name }}</span>
+                    <span class="doc-pattern">{{ doc.pattern }}</span>
+                  </div>
+                  <button class="btn-remove">×</button>
+                </div>
+                <button class="add-doc-btn">+ Novo Documento</button>
+              </div>
+            </div>
+            <button class="add-category-btn">+ Adicionar Categoria</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Seção de Seiri (Utilização) -->
+    <div *ngIf="activeTab === 'seiri'" class="view-section">
+      <div class="section-header">
+        <div>
+          <h2>Senso de Utilização (Seiri)</h2>
+          <p>Defina as regras para separação entre o que é útil e o que deve ser descartado.</p>
+        </div>
+      </div>
+
+      <div class="seiri-grid">
+        <!-- Inatividade -->
+        <div class="settings-card">
+          <div class="card-icon">🏷️</div>
+          <div class="card-details">
+            <h3>Critério de Inatividade (Red Tag)</h3>
+            <p>Arquivos sem acesso após este período serão marcados para revisão.</p>
+            <div class="input-group">
+              <input type="number" [(ngModel)]="seiriConfig.daysInactive" class="seiri-input">
+              <span>dias</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tamanho -->
+        <div class="settings-card">
+          <div class="card-icon">⚖️</div>
+          <div class="card-details">
+            <h3>Threshold de Tamanho Crítico</h3>
+            <p>Arquivos acima deste tamanho sem uso tornam-se alertas prioritários.</p>
+            <div class="input-group">
+              <input type="number" [(ngModel)]="seiriConfig.heavyThresholdMB" class="seiri-input">
+              <span>MB</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lixo Automático -->
+        <div class="settings-card full-width">
+          <div class="card-icon">🧹</div>
+          <div class="card-details">
+            <h3>Filtro de Lixo Digital</h3>
+            <p>Padrões de nomes e extensões que o sistema classifica automaticamente como descarte.</p>
+            <div class="tag-input-area">
+              <span *ngFor="let pattern of seiriConfig.trashPatterns" class="config-tag trash">
+                {{ pattern }}
+                <button class="tag-close">×</button>
+              </span>
+              <button class="btn-add-tag">+ Adicionar Padrão</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Preservação -->
+        <div class="settings-card full-width">
+          <div class="card-icon">🛡️</div>
+          <div class="card-details">
+            <h3>Whitelist de Preservação</h3>
+            <p>Extensões essenciais que nunca devem ser sugeridas para descarte automático.</p>
+            <div class="tag-input-area">
+              <span *ngFor="let ext of seiriConfig.preservationExts" class="config-tag safe">
+                {{ ext }}
+                <button class="tag-close">×</button>
+              </span>
+              <button class="btn-add-tag">+ Incluir Extensão</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Seção de Seiton (Organização) -->
+    <div *ngIf="activeTab === 'seiton'" class="view-section">
+      <div class="section-header">
+        <div>
+          <h2>Senso de Organização (Seiton)</h2>
+          <p>Defina como os arquivos devem ser ordenados e onde cada coisa deve estar.</p>
+        </div>
+      </div>
+
+      <div class="seiri-grid">
+        <!-- Profundidade -->
+        <div class="settings-card">
+          <div class="card-icon">🗂️</div>
+          <div class="card-details">
+            <h3>Profundidade Máxima</h3>
+            <p>Alertar quando a estrutura de pastas ultrapassar este nível.</p>
+            <div class="input-group">
+              <input type="number" [(ngModel)]="seitonConfig.maxFolderDepth" class="seiri-input">
+              <span>níveis</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- IA Threshold -->
+        <div class="settings-card">
+          <div class="card-icon">🤖</div>
+          <div class="card-details">
+            <h3>Confiança para Auto-Mover</h3>
+            <p>Mover arquivos automaticamente se a IA tiver esta certeza.</p>
+            <div class="input-group">
+              <input type="number" [(ngModel)]="seitonConfig.iaAutoMoveThreshold" class="seiri-input">
+              <span>%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Prioridade de Agrupamento -->
+        <div class="settings-card full-width">
+          <div class="card-icon">🔝</div>
+          <div class="card-details">
+            <h3>Prioridade de Agrupamento</h3>
+            <p>Define a hierarquia primária sugerida pela IA na organização.</p>
+            <div class="tag-input-area">
+              <button 
+                class="config-tag" 
+                [class.safe]="seitonConfig.groupingPriority === 'Data'"
+                (click)="seitonConfig.groupingPriority = 'Data'">📅 Por Data</button>
+              <button 
+                class="config-tag" 
+                [class.safe]="seitonConfig.groupingPriority === 'Projeto'"
+                (click)="seitonConfig.groupingPriority = 'Projeto'">🚀 Por Projeto</button>
+              <button 
+                class="config-tag" 
+                [class.safe]="seitonConfig.groupingPriority === 'Setor'"
+                (click)="seitonConfig.groupingPriority = 'Setor'">🏢 Por Setor</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Alinhamento Semântico -->
+        <div class="settings-card full-width">
+          <div class="card-icon">🔗</div>
+          <div class="card-details">
+            <h3>Alinhamento Semântico Nome-Pasta</h3>
+            <p>Validar se o nome do arquivo contém palavras-chave da categoria de destino definida no Seiketsu.</p>
+            
+            <div class="toggle-area">
+              <label class="switch">
+                <input type="checkbox" [(ngModel)]="seitonConfig.validateSemanticAlignment">
+                <span class="slider round"></span>
+              </label>
+              <span>Ativar validação inteligente por contexto</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Seção de Seiso (Limpeza) -->
+    <div *ngIf="activeTab === 'seiso'" class="view-section">
+      <div class="section-header">
+        <div>
+          <h2>Senso de Limpeza (Seiso)</h2>
+          <p>Mantenha o ambiente livre de redundâncias e dados desnecessários.</p>
+        </div>
+      </div>
+
+      <div class="seiri-grid">
+        <!-- Deduplicação -->
+        <div class="settings-card">
+          <div class="card-icon">👥</div>
+          <div class="card-details">
+            <h3>Nível de Deduplicação</h3>
+            <p>Define o rigor na busca por arquivos repetidos.</p>
+            <div class="tag-input-area">
+              <button 
+                class="config-tag" 
+                [class.safe]="seisoConfig.deduplicationType === 'Exact'"
+                (click)="seisoConfig.deduplicationType = 'Exact'">Bit-a-Bit (Exato)</button>
+              <button 
+                class="config-tag" 
+                [class.safe]="seisoConfig.deduplicationType === 'Semantic'"
+                (click)="seisoConfig.deduplicationType = 'Semantic'">Semântico (Similar)</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ciclo de Vida/Versões -->
+        <div class="settings-card">
+          <div class="card-icon">🔄</div>
+          <div class="card-details">
+            <h3>Retenção de Versões</h3>
+            <p>Manter apenas as X versões mais recentes de arquivos editados.</p>
+            <div class="input-group">
+              <input type="number" [(ngModel)]="seisoConfig.versionsToKeep" class="seiri-input">
+              <span>versões</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Frequência de Varredura -->
+        <div class="settings-card full-width">
+          <div class="card-icon">⏲️</div>
+          <div class="card-details">
+            <h3>Agendamento de Higiene Digital</h3>
+            <p>Frequência com que o motor de limpeza deve rodar em segundo plano.</p>
+            <div class="tag-input-area">
+              <button 
+                class="config-tag" 
+                [class.safe]="seisoConfig.scanFrequency === 'Daily'"
+                (click)="seisoConfig.scanFrequency = 'Daily'">Diário</button>
+              <button 
+                class="config-tag" 
+                [class.safe]="seisoConfig.scanFrequency === 'Weekly'"
+                (click)="seisoConfig.scanFrequency = 'Weekly'">Semanal</button>
+              <button 
+                class="config-tag" 
+                [class.safe]="seisoConfig.scanFrequency === 'Monthly'"
+                (click)="seisoConfig.scanFrequency = 'Monthly'">Mensal</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Limpeza Automática -->
+        <div class="settings-card full-width">
+          <div class="card-icon">🗑️</div>
+          <div class="card-details">
+            <h3>Limpeza Automática de Temporários</h3>
+            <p>Esvaziar pastas de cache e arquivos de backup do sistema automaticamente.</p>
+            <div class="toggle-area">
+              <label class="switch">
+                <input type="checkbox" [(ngModel)]="seisoConfig.autoCleanTemp">
+                <span class="slider round"></span>
+              </label>
+              <span>Ativar limpeza programada</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Seção de Shitsuke (Disciplina) -->
+    <div *ngIf="activeTab === 'shitsuke'" class="view-section">
+      <div class="section-header">
+        <div>
+          <h2>Senso de Disciplina (Shitsuke)</h2>
+          <p>Garanta a continuidade e a sustentabilidade dos hábitos do 5S Digital.</p>
+        </div>
+      </div>
+
+      <div class="seiri-grid">
+        <!-- Gamificação -->
+        <div class="settings-card full-width">
+          <div class="card-icon">🎮</div>
+          <div class="card-details">
+            <h3>Engajamento e Gamificação</h3>
+            <p>Ative o sistema de pontos e medalhas para incentivar a manutenção do 5S.</p>
+            <div class="toggle-area">
+              <label class="switch">
+                <input type="checkbox" [(ngModel)]="shitsukeConfig.enableGamification">
+                <span class="slider round"></span>
+              </label>
+              <span>Ativar sistema de recompensas</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pontuação -->
+        <div *ngIf="shitsukeConfig.enableGamification" class="settings-card animate-fade-in">
+          <div class="card-icon">💎</div>
+          <div class="card-details">
+            <h3>Ponto por Documento</h3>
+            <p>Pontos ganhos por cada documento corretamente classificado.</p>
+            <div class="input-group">
+              <input type="number" [(ngModel)]="shitsukeConfig.pointsPerClassification" class="seiri-input">
+              <span>pontos</span>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="shitsukeConfig.enableGamification" class="settings-card animate-fade-in">
+          <div class="card-icon">🔥</div>
+          <div class="card-details">
+            <h3>Ponto por Limpeza</h3>
+            <p>Pontos ganhos por cada duplicata eliminada (Seiso).</p>
+            <div class="input-group">
+              <input type="number" [(ngModel)]="shitsukeConfig.pointsPerDeduplication" class="seiri-input">
+              <span>pontos</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Auditoria -->
+        <div class="settings-card">
+          <div class="card-icon">📋</div>
+          <div class="card-details">
+            <h3>Ciclo de Auditoria 5S</h3>
+            <p>Frequência para geração de relatórios de conformidade.</p>
+            <div class="tag-input-area">
+              <button 
+                class="config-tag" 
+                [class.safe]="shitsukeConfig.auditFrequency === 'Monthly'"
+                (click)="shitsukeConfig.auditFrequency = 'Monthly'">Mensal</button>
+              <button 
+                class="config-tag" 
+                [class.safe]="shitsukeConfig.auditFrequency === 'Quarterly'"
+                (click)="shitsukeConfig.auditFrequency = 'Quarterly'">Trimestral</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ranking -->
+        <div class="settings-card">
+          <div class="card-icon">🏆</div>
+          <div class="card-details">
+            <h3>Ranking de Departamentos</h3>
+            <p>Permitir que os setores vejam o progresso uns dos outros.</p>
+            <div class="toggle-area">
+              <label class="switch">
+                <input type="checkbox" [(ngModel)]="shitsukeConfig.showLeaderboard">
+                <span class="slider round"></span>
+              </label>
+              <span>Exibir Ranking Global</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Placeholder para as outras seções (que ainda não foram implementadas) -->
+    <div *ngIf="activeTab !== 'general' && activeTab !== 'seiketsu' && activeTab !== 'seiri' && activeTab !== 'seiton' && activeTab !== 'seiso' && activeTab !== 'shitsuke'" class="view-section placeholder-view">
+      <div class="placeholder-icon">📋</div>
+      <h2>Configurações de {{ activeTab | titlecase }}</h2>
+      <p>Esta seção está sendo preparada para receber os parâmetros técnicos do 5S.</p>
+    </div>
+  </div>
+</div>
