@@ -35,14 +35,24 @@
 
 .btn-back {
   padding: 0.6rem 1.25rem;
-  background: var(--glass);
-  border: 1px solid var(--glass-border);
-  color: var(--text-main);
+  background: var(--gradient-primary);
+  border: none;
+  color: var(--text-on-primary) !important;
   text-decoration: none;
   border-radius: 12px;
   font-weight: 700;
   font-size: 0.9rem;
   transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 12px var(--primary-glow);
+}
+
+.btn-back:hover {
+  transform: scale(1.02) translateX(-4px);
+  opacity: 0.9;
+  box-shadow: 0 6px 15px var(--primary-glow);
 }
 
 .summary-card {
@@ -90,7 +100,7 @@
 }
 
 .impact-card {
-  background: var(--glass);
+  background: var(--bg-card);
   border-radius: 28px;
   padding: 3rem;
   display: flex;
@@ -117,7 +127,7 @@
   font-size: 1.6rem;
   font-weight: 800;
   font-family: 'Outfit', sans-serif;
-  color: #000;
+  color: var(--text-main);
   margin-top: 0.5rem;
 }
 
@@ -212,10 +222,10 @@
 }
 
 .bar.destaque {
-    background: #7c3aed;
-    color: white;
+    background: var(--primary);
+    color: var(--text-on-primary) !important;
     border: none;
-    box-shadow: none;
+    box-shadow: var(--shadow-lg);
 }
 
 .actions {

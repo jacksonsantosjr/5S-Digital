@@ -36,7 +36,7 @@
   width: 40px;
   height: 40px;
   background: var(--primary);
-  color: white;
+  color: var(--text-on-primary, #030712);
   border-radius: var(--radius-std);
   display: flex;
   align-items: center;
@@ -118,6 +118,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background: none !important;
+  box-shadow: none !important;
 }
 
 .circular-chart {

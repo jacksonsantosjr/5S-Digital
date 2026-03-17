@@ -49,10 +49,11 @@
 }
 
 .logo-icon {
-  font-size: 1.5rem;
-  min-width: 32px;
+  font-size: 2.2rem;
+  min-width: 40px;
   display: flex;
   justify-content: center;
+  transition: transform 0.3s ease;
 }
 
 .logo h1 {
@@ -66,26 +67,6 @@
   letter-spacing: -0.03em;
 }
 
-.theme-toggle-compact {
-  background: transparent;
-  border: none;
-  color: var(--text-main);
-  border-radius: 8px;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-size: 1rem;
-}
-
-.theme-toggle-compact:hover {
-  color: var(--primary);
-  transform: scale(1.2);
-}
-
 .user-profile {
   display: flex;
   align-items: center;
@@ -96,9 +77,54 @@
   border-top: 1px solid var(--glass-border);
   border-bottom: 1px solid var(--glass-border);
   transition: all 0.3s ease;
+  position: relative;
 }
 
-.app-container.sidebar-collapsed .theme-toggle-compact {
+.avatar {
+  width: 40px;
+  height: 40px;
+  background: var(--gradient-primary);
+  color: var(--text-on-primary);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.theme-toggle-end {
+  background: var(--glass);
+  border: none;
+  color: var(--text-main);
+  border-radius: 12px;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.theme-toggle-end:hover {
+  background: var(--primary);
+  color: #FFFFFF;
+  transform: scale(1.1);
+  border-color: var(--primary);
+}
+
+.app-container.sidebar-collapsed .theme-toggle-end {
   display: none;
 }
 
@@ -107,7 +133,7 @@
   height: 44px;
   min-width: 44px;
   background: var(--gradient-primary);
-  color: white;
+  color: var(--text-on-primary, #030712);
   border-radius: var(--radius-std);
   display: flex;
   align-items: center;
@@ -175,14 +201,14 @@
 
 .nav-item.active {
   background: var(--gradient-primary);
-  color: white;
+  color: var(--text-on-primary, #030712);
   box-shadow: 0 10px 20px -5px var(--primary-glow);
   transform: translateX(4px);
 }
 
 .nav-item.scan-btn {
   background: var(--gradient-primary);
-  color: white;
+  color: var(--text-on-primary, #030712);
   margin-bottom: 1rem;
   box-shadow: 0 10px 20px -5px var(--primary-glow);
   border: 1px solid rgba(255, 255, 255, 0.1);

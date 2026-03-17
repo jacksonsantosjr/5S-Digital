@@ -4,12 +4,9 @@
     <div class="sidebar-header">
       <div class="logo-group">
         <div class="logo">
-          <span class="logo-icon">📂</span>
+          <span class="logo-icon">💻</span>
           <h1 *ngIf="isSidebarExpanded">5S Digital</h1>
         </div>
-        <button class="theme-toggle-compact" (click)="toggleTheme()" [title]="isLightTheme ? 'Modo Escuro' : 'Modo Claro'">
-          <span class="toggle-icon">{{ isLightTheme ? '🌙' : '☀️' }}</span>
-        </button>
       </div>
     </div>
 
@@ -19,6 +16,9 @@
         <span class="user-name">Jackson Junior</span>
         <span class="user-role">Administrador</span>
       </div>
+      <button class="theme-toggle-end" (click)="toggleTheme()" [title]="isLightTheme ? 'Modo Escuro' : 'Modo Claro'">
+        <span class="toggle-icon">{{ isLightTheme ? '🌙' : '☀️' }}</span>
+      </button>
     </div>
 
     <nav class="sidebar-nav">
@@ -39,14 +39,14 @@
         <span class="nav-label" *ngIf="isSidebarExpanded">Classificação IA</span>
       </a>
       
-      <a class="nav-item" routerLink="/cleanup" routerLinkActive="active" title="Limpeza">
-        <span class="nav-icon">🧹</span>
-        <span class="nav-label" *ngIf="isSidebarExpanded">Limpeza Digital</span>
-      </a>
-      
       <a class="nav-item" routerLink="/organization" routerLinkActive="active" title="Organização">
         <span class="nav-icon">📂</span>
         <span class="nav-label" *ngIf="isSidebarExpanded">Organização</span>
+      </a>
+
+      <a class="nav-item" routerLink="/cleanup" routerLinkActive="active" title="Limpeza">
+        <span class="nav-icon">🧹</span>
+        <span class="nav-label" *ngIf="isSidebarExpanded">Limpeza Digital</span>
       </a>
       
       <a class="nav-item" routerLink="/standardization" routerLinkActive="active" title="Padronização">

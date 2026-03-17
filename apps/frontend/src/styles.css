@@ -8,20 +8,21 @@
   --text-muted: #9ca3af;
   --border: rgba(255, 255, 255, 0.08);
   
-  --primary: #6366f1;
-  --primary-light: #818cf8;
-  --primary-glow: rgba(99, 102, 241, 0.4);
+  --primary: #F9FAFB;
+  --primary-light: #E5E7EB;
+  --primary-glow: rgba(249, 250, 251, 0.2);
+  --text-on-primary: #030712;
   
-  --secondary: #ec4899;
-  --accent: #f43f5e;
+  --secondary: #0EA5E9;
+  --accent: #38bdf8;
   
   --glass: rgba(255, 255, 255, 0.03);
   --glass-border: rgba(255, 255, 255, 0.1);
   --glass-hover: rgba(255, 255, 255, 0.08);
   
-  --gradient-primary: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-  --gradient-mesh: radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
-                   radial-gradient(at 100% 0%, rgba(236, 72, 153, 0.15) 0px, transparent 50%);
+  --gradient-primary: linear-gradient(135deg, #F9FAFB 0%, #94A3B8 100%);
+  --gradient-mesh: radial-gradient(at 0% 0%, rgba(249, 250, 251, 0.1) 0px, transparent 50%),
+                   radial-gradient(at 100% 0%, rgba(14, 165, 233, 0.1) 0px, transparent 50%);
   
   --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
   
@@ -30,26 +31,27 @@
 }
 
 .light-theme {
-  --bg-app: #f8fafc;
-  --bg-card: rgba(255, 255, 255, 0.8);
+  --bg-app: #E2E8F0;
+  --bg-card: #F1F5F9;
   --text-main: #0f172a;
-  --text-muted: #64748b;
-  --border: rgba(0, 0, 0, 0.05);
+  --text-muted: #475569;
+  --border: rgba(0, 0, 0, 0.1);
   
-  --primary: #4f46e5;
-  --primary-light: #6366f1;
-  --primary-glow: rgba(79, 70, 229, 0.15);
+  --primary: #1E3A8A;
+  --primary-light: #1E40AF;
+  --primary-glow: rgba(30, 58, 138, 0.15);
+  --text-on-primary: #FFFFFF;
   
-  --secondary: #db2777;
-  --accent: #e11d48;
+  --secondary: #0EA5E9;
+  --accent: #0284c7;
   
   --glass: rgba(0, 0, 0, 0.02);
   --glass-border: rgba(0, 0, 0, 0.05);
   --glass-hover: rgba(0, 0, 0, 0.05);
   
-  --gradient-primary: linear-gradient(135deg, #4f46e5 0%, #9333ea 100%);
-  --gradient-mesh: radial-gradient(at 0% 0%, rgba(79, 70, 229, 0.05) 0px, transparent 50%),
-                   radial-gradient(at 100% 0%, rgba(219, 39, 119, 0.05) 0px, transparent 50%);
+  --gradient-primary: linear-gradient(135deg, #172554 0%, #1E40AF 100%);
+  --gradient-mesh: radial-gradient(at 0% 0%, rgba(30, 58, 138, 0.05) 0px, transparent 50%),
+                   radial-gradient(at 100% 0%, rgba(14, 165, 233, 0.05) 0px, transparent 50%);
                    
                     
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 10, 0.05), 0 4px 6px -4px rgba(0, 0, 10, 0.05);
@@ -105,7 +107,7 @@ h1, h2, h3, h4, h5, h6 {
 .btn-primary {
   background: var(--gradient-primary);
   border: none;
-  color: white !important;
+  color: var(--text-on-primary, white) !important;
   padding: 0.75rem 1.75rem;
   border-radius: var(--radius-std);
   font-weight: 700;
