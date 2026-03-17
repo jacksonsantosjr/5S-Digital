@@ -46,25 +46,27 @@
 }
 
 .profile-card {
-  background: var(--bg-card);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  background: var(--glass);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
   border-radius: 28px;
   padding: 3rem;
   border: 1px solid var(--glass-border);
   margin-bottom: 3rem;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.4);
 }
 
-.profile-card.destaque::before {
+.profile-card::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 6px;
+  height: 4px;
   background: var(--gradient-primary);
+  opacity: 0.8;
 }
 
 .user-main {
@@ -108,14 +110,14 @@
 
 .points-val {
     display: block;
-    font-size: 3.5rem;
-    font-weight: 900;
+    font-size: 2.8rem;
+    font-weight: 800;
     font-family: 'Outfit', sans-serif;
     background: var(--gradient-primary);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));
+    filter: drop-shadow(0 4px 10px var(--primary-glow));
 }
 
 .points-lbl {
