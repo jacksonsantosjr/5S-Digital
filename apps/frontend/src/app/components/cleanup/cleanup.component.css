@@ -70,8 +70,23 @@
 
 .stat-card.destaque {
   background: var(--glass);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
   border-color: var(--primary-glow);
-  box-shadow: 0 15px 40px -10px var(--primary-glow);
+  box-shadow: 0 20px 40px -15px var(--primary-glow);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card.destaque::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-primary);
+  opacity: 0.8;
 }
 
 .stat-card h3 {
