@@ -46,16 +46,16 @@
 }
 
 .profile-card {
-  background: var(--glass);
-  backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(40px);
+  background: var(--bg-card);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   border-radius: 28px;
   padding: 3rem;
   border: 1px solid var(--glass-border);
   margin-bottom: 3rem;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.4);
+  box-shadow: var(--shadow-lg);
 }
 
 .profile-card::before {
