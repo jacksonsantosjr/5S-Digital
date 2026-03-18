@@ -34,24 +34,29 @@
       
       <div class="nav-section" *ngIf="isSidebarExpanded">Ações de Governança</div>
       
-      <a class="nav-item" routerLink="/classification" routerLinkActive="active" title="Classificação IA">
+      <a class="nav-item" routerLink="/classification" routerLinkActive="active" title="Seiri">
         <span class="nav-icon">🧠</span>
-        <span class="nav-label" *ngIf="isSidebarExpanded">Classificação IA</span>
+        <span class="nav-label" *ngIf="isSidebarExpanded">Seiri</span>
       </a>
       
-      <a class="nav-item" routerLink="/organization" routerLinkActive="active" title="Organização">
+      <a class="nav-item" routerLink="/organization" routerLinkActive="active" title="Seiton">
         <span class="nav-icon">📂</span>
-        <span class="nav-label" *ngIf="isSidebarExpanded">Organização</span>
+        <span class="nav-label" *ngIf="isSidebarExpanded">Seiton</span>
       </a>
 
-      <a class="nav-item" routerLink="/cleanup" routerLinkActive="active" title="Limpeza">
+      <a class="nav-item" routerLink="/cleanup" routerLinkActive="active" title="Seiso">
         <span class="nav-icon">🧹</span>
-        <span class="nav-label" *ngIf="isSidebarExpanded">Limpeza Digital</span>
+        <span class="nav-label" *ngIf="isSidebarExpanded">Seiso</span>
       </a>
       
-      <a class="nav-item" routerLink="/standardization" routerLinkActive="active" title="Padronização">
+      <a class="nav-item" routerLink="/standardization" routerLinkActive="active" title="Seiketsu">
         <span class="nav-icon">📏</span>
-        <span class="nav-label" *ngIf="isSidebarExpanded">Padronização</span>
+        <span class="nav-label" *ngIf="isSidebarExpanded">Seiketsu</span>
+      </a>
+
+      <a class="nav-item" routerLink="/gamification" routerLinkActive="active" title="Shitsuke">
+        <span class="nav-icon">🏆</span>
+        <span class="nav-label" *ngIf="isSidebarExpanded">Shitsuke</span>
       </a>
       
       <div class="nav-section" *ngIf="isSidebarExpanded">Relatórios e Segurança</div>
@@ -64,11 +69,6 @@
       <a class="nav-item" routerLink="/security" routerLinkActive="active" title="Segurança">
         <span class="nav-icon">🛡️</span>
         <span class="nav-label" *ngIf="isSidebarExpanded">Privacidade & LGPD</span>
-      </a>
-      
-      <a class="nav-item" routerLink="/gamification" routerLinkActive="active" title="Gamificação">
-        <span class="nav-icon">🏆</span>
-        <span class="nav-label" *ngIf="isSidebarExpanded">Conquistas</span>
       </a>
       
       <div class="nav-section" *ngIf="isSidebarExpanded" data-v="2">Administração</div>
