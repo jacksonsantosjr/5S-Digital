@@ -1,6 +1,6 @@
-<div class="app-container" [class.sidebar-collapsed]="!isSidebarExpanded">
-  <!-- Sidebar -->
-  <aside class="sidebar">
+<div class="app-container" [class.sidebar-collapsed]="!isSidebarExpanded" [class.no-sidebar]="!authService.isLoggedIn()">
+  <!-- Sidebar - Só aparece se logado -->
+  <aside class="sidebar" *ngIf="authService.isLoggedIn()">
     <div class="sidebar-header">
       <div class="logo-group">
         <div class="logo">
@@ -77,6 +77,12 @@
         <span class="nav-icon">⚙️</span>
         <span class="nav-label" *ngIf="isSidebarExpanded">Configurações</span>
       </a>
+
+      <!-- Botão de Logout -->
+      <button class="nav-item logout-btn" (click)="authService.logout()" title="Sair do Sistema">
+        <span class="nav-icon">🚪</span>
+        <span class="nav-label" *ngIf="isSidebarExpanded">Sair</span>
+      </button>
     </nav>
 
     <!-- Footer removido para limpeza -->
@@ -88,7 +94,7 @@
   </aside>
 
   <!-- Main Content -->
-  <main class="main-content">
+  <main class="main-content" [class.no-padding]="!authService.isLoggedIn()">
     <router-outlet></router-outlet>
   </main>
 </div>

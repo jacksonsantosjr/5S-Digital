@@ -1,0 +1,47 @@
+<div class="landing-container">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-badge">A Era da Governança Exponencial</div>
+    <h1>
+      Transforme o Caos em <br>
+      <span class="gradient-text">Eficiência Digital</span>
+    </h1>
+    <p class="hero-description">
+      Aplique a metodologia 5S (Seiri, Seiton, Seiso, Seiketsu, Shitsuke) ao ecossistema de arquivos com o poder da inteligência artificial.
+    </p>
+    
+    <div class="cta-group">
+      <button class="btn-hero primary" (click)="openLogin()">Acessar a Plataforma</button>
+    </div>
+  </section>
+
+  <!-- Login Modal Overlay -->
+  <div class="modal-overlay" *ngIf="showLogin" (click)="closeLogin()">
+    <div class="login-modal" (click)="$event.stopPropagation()" (keyup.enter)="handleLogin()">
+      <button class="btn-close" (click)="closeLogin()">×</button>
+      
+      <div class="modal-header">
+        <h2>Bem-vindo de volta</h2>
+        <p>Identifique-se para gerenciar sua governança.</p>
+      </div>
+
+      <div class="login-form">
+        <div class="input-group">
+          <label>E-mail Corporativo</label>
+          <input type="email" [(ngModel)]="email" (keyup.enter)="handleLogin()" class="modal-input" placeholder="seu.nome@empresa.com">
+        </div>
+
+        <div class="input-group">
+          <label>Senha Master</label>
+          <input type="password" [(ngModel)]="password" (keyup.enter)="handleLogin()" class="modal-input" placeholder="••••••••">
+        </div>
+
+        <div class="error-msg" *ngIf="errorMessage">
+          {{ errorMessage }}
+        </div>
+
+        <button class="btn-login" (click)="handleLogin()">Entrar no Ecossistema</button>
+      </div>
+    </div>
+  </div>
+</div>
