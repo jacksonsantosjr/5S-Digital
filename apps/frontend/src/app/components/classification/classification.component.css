@@ -59,7 +59,7 @@
   background: var(--bg-card);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border-radius: 28px;
+  border-radius: 12px;
   padding: 3rem;
   border: 1px solid var(--glass-border);
   max-width: 700px;
@@ -80,7 +80,7 @@
   padding: 4rem;
   background: var(--glass);
   border: 2px dashed var(--glass-border);
-  border-radius: 20px;
+  border-radius: 8px;
   transition: all 0.3s;
 }
 
@@ -107,7 +107,7 @@
 
 .result-card {
   background: var(--bg-card);
-  border-radius: 28px;
+  border-radius: 12px;
   padding: 3rem;
   border: 1px solid var(--primary-glow);
   max-width: 900px;
@@ -121,7 +121,7 @@
   margin: 2rem 0;
   padding: 1.5rem;
   background: var(--glass);
-  border-radius: 20px;
+  border-radius: 8px;
   border: 1px solid var(--glass-border);
 }
 
@@ -147,7 +147,7 @@
 .text-box {
   background: var(--bg-app);
   padding: 2rem;
-  border-radius: 16px;
+  border-radius: 8px;
   border: 1px solid var(--glass-border);
   font-family: 'Inter', sans-serif;
   line-height: 1.6;

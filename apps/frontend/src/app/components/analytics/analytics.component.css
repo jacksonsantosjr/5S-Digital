@@ -59,7 +59,7 @@
   background: var(--bg-card);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border-radius: 28px;
+  border-radius: 12px;
   padding: 3rem;
   border: 1px solid var(--glass-border);
   margin-bottom: 3rem;
@@ -101,7 +101,7 @@
 
 .impact-card {
   background: var(--bg-card);
-  border-radius: 28px;
+  border-radius: 12px;
   padding: 3rem;
   display: flex;
   justify-content: space-around;
@@ -133,7 +133,7 @@
 
 .scores-card {
   background: var(--bg-card);
-  border-radius: 28px;
+  border-radius: 12px;
   padding: 3rem;
   border: 1px solid var(--glass-border);
 }
@@ -175,7 +175,7 @@
 
 .history-card {
   background: var(--bg-card);
-  border-radius: 28px;
+  border-radius: 12px;
   padding: 3rem;
   border: 1px solid var(--glass-border);
   margin-bottom: 3rem;

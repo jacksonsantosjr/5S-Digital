@@ -59,7 +59,7 @@
   background: var(--bg-card);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border-radius: 24px;
+  border-radius: 12px;
   padding: 2rem;
   border: 1px solid var(--glass-border);
   margin-bottom: 3rem;
